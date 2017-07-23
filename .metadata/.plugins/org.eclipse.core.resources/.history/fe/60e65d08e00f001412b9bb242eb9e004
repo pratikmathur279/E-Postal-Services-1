@@ -1,0 +1,168 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script language="javascript">
+function validate(objForm)
+{
+if(objForm.fname.value.length==0){
+alert("Please enter First Name!");
+objForm.fname.focus();
+return false;
+}
+
+if(objForm.lname.value.length==0){
+	alert("Please enter Last Name!");
+	objForm.lname.focus();
+	return false;
+	}
+
+if(!(isNaN(document.objForm.fname.value)))
+{
+alert("Name has character only!");
+return false;
+}
+
+if(objForm.password.value.length==0){
+alert("Please enter Password!");
+objForm.t2.focus();
+return false;
+}
+
+
+if(objForm.email.value.length==0){
+alert("Please enter Email!");
+objForm.email.focus();
+return false;
+}
+
+if (document.objForm.email.value != "")
+{
+var Temp = document.objForm.t4
+var AtSym = Temp.value.indExampleOf('@')
+var Period = Temp.value.lastIndExampleOf('.')
+var Space = Temp.value.indExampleOf(' ')
+var Length = Temp.value.length - 1
+if ((AtSym < 1) ||
+(Period <= AtSym+1) ||
+(Period == Length ) ||
+(Space != -1))
+{
+alert("Please enter a valid Email ID!");
+document.objForm.email.focus();
+return false;
+}
+}
+
+if(objForm.phoneno.value.length==0){
+alert("Please enter Phone!");
+objForm.phoneno.focus();
+return false;
+}
+
+if(objForm.username.value.length==0){
+alert("Please enter Username!");
+objForm.t6.focus();
+return false;
+}
+
+if(objForm.city.value.length==0){
+alert("Please enter City!");
+objForm.city.focus();
+return false;
+}
+
+if(!(isNaN(document.objForm.city.value)))
+{
+alert("City has character only!");
+objForm.city.focus();
+return false;
+}
+
+
+if(objForm.pincode.value.length==0){
+alert("Please enter Pincode!");
+objForm.t9.focus();
+return false;
+}
+
+return true;
+}
+</script>
+</head>
+<body>
+<%
+
+try
+{
+	String username = request.getParameter("username");
+	String password = request.getParameter("password");
+	String fname = request.getParameter("fname");
+	String lname = request.getParameter("lname");
+	String email = request.getParameter("email");
+	String role = request.getParameter("role");
+	String gender = request.getParameter("gender");
+	String day = request.getParameter("day");
+	String month = request.getParameter("month");
+	String year = request.getParameter("year");
+	String addr1 = request.getParameter("addr1");
+	String addr2 = request.getParameter("addr2");
+	String city = request.getParameter("city");
+	String pincode = request.getParameter("pincode");
+	String phoneno = request.getParameter("phoneno");
+	String accno = request.getParameter("accno");
+	String bankname = request.getParameter("bankname");
+
+Class.forName("com.ibm.db2.jcc.DB2Driver");
+Connection con=DriverManager.getConnection("jdbc:db2://localhost:50000/POSTALSE","PRATI_000","FCBarcelona10");
+String string="insert into userdetails(username,password,fname,lname,email,role,gender,day,month,year,addr1,addr2,city,pincode,phoneno,accno,bankname) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+PreparedStatement st = con.prepareStatement(string);
+ 
+ st.setString(1,username);
+ st.setString(2,password);
+ st.setString(3,fname);
+ st.setString(4,lname);
+ st.setString(5,email);
+ st.setString(6,role);
+ st.setString(7,gender);
+ st.setString(8,day);
+ st.setString(9,month);
+ st.setString(10,year);
+ st.setString(11,addr1);
+ st.setString(12,addr2);
+ st.setString(13,city);
+ st.setString(14,pincode);
+ st.setString(15,phoneno);
+ st.setString(16,accno);
+ st.setString(17,bankname);
+
+ int i= st.executeUpdate();
+
+ if(i!=0)
+{
+	response.sendRedirect("home.jsp");
+}
+ else
+{
+	out.println("Not Executed");
+}
+ 
+  
+}
+ catch(ClassNotFoundException e)
+{
+e.printStackTrace();
+}
+catch(SQLException e)
+{
+e.printStackTrace();
+}
+
+%>
+
+</body>
+</html>

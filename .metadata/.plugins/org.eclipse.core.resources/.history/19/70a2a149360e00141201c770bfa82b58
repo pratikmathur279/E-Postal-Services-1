@@ -1,0 +1,141 @@
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>----------ONLINE INSURANCE PORTAL----------</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <SCRIPT>
+        function validate()
+        {
+          if(document.oip.term.value=="Select")
+          {
+                alert("Please Select a Term");
+                return false;
+          }
+          if(document.oip.period.value=="Select")
+          {
+                alert("Please Select a Period");
+                return false;
+          }
+          return true;
+        }
+    </SCRIPT>
+</head>
+<%!
+String uname;
+%>
+<%
+    uname=(String)session.getAttribute("uname");
+%>
+<body bgcolor="#FEEFC0">
+<form action="calpolicy.jsp" method="post" name="oip" onsubmit="return validate()">
+<div style="position: absolute; width: 768px; height: 552px; z-index: 1; left: 116px; top: 63px; background-color:#FFFFFF; background-image:url('img/BLue.jpg')" id="layer1">
+<table border="0" cellpadding="0" cellspacing="0" width="770" height="541">
+    <tr>
+        <td valign="top" height="126" width="516">&nbsp;                                                
+        <img border="0" src="img/Header%20Image.gif" width="376" height="93"></td>
+    </tr>
+    <tr>
+        <td valign="top" height="441" width="770" colspan="2">
+            <div style="position: absolute; width: 769px; height: 10px; z-index: 2; left: 2px; top: 122px" id="layer16">
+            <img border="0" src="img/line.jpg" width="766" height="7"></div>
+            
+                <div style="position: absolute; width: 131px; height: 68px; z-index: 3; left: -495px; top: 469px" id="layer9">
+                &nbsp;</div>
+                <div style="position: absolute; width: 93px; height: 110px; z-index: 2; left: -533px; top: -95px" id="layer8">
+                <img border="0" src="img/LIC_logo.gif" width="91" height="113"></div>
+                <div style="position: absolute; width: 55px; height: 22px; z-index: 5; left: 636px; top: 463px" id="layer11">
+                    <b><a href="login.jsp">
+                <font face="Arial Narrow" size="2" color="#1A86D7">Logout</font></a></b></div>
+               <div style="position: absolute; width: 415px; height: 21px; z-index: 1; left: 357px; top: 98px" id="layer6">
+               <table border="0" width="100%" id="table1">
+                <tr>
+                    <td align="center"><b><a href="editclient.jsp"><font face="Arial Narrow" size="2" color="#1A86D7">Edit profile</font></a></b></td>
+                    <td width="73" align="center"><b><a href="viewpolicy.jsp"><font face="Arial Narrow" size="2" color="#1A86D7">View Policy</font></a></b></td>
+                    <td width="114" align="center"><b><a href="prcalc.jsp"><font face="Arial Narrow" size="2" color="#1A86D7">&nbsp;Premium Calculator</font></a></b></td>
+                    <td width="77" align="center"><b><a href="paymentstatus.jsp"><font face="Arial Narrow" size="2" color="#1A86D7">Policy Status</font></a></b></td>
+                    <td width="62" align="center"><b><a href="feedback.jsp"><font face="Arial Narrow" size="2" color="#1A86D7">Feedback</font></a></b></td>
+                </tr>
+            </table>
+			<div style="position: absolute; width: 131px; height: 68px; z-index: 3; left: -495px; top: 469px" id="layer18">
+&nbsp;</div>
+			<div style="position: absolute; width: 93px; height: 110px; z-index: 2; left: -352px; top: -94px" id="layer19">
+				<img border="0" src="img/LIC_logo.gif" width="91" height="113"></div>
+            </div>
+        </td>
+    </tr>
+    </M>
+</table>
+</div>
+                <div style="position: absolute; width: 221px; height: 37px; z-index: 4; left: 119px; top: 200px" id="layer20">
+                <font size="4" face="Tahoma" color="#1A86D7">Welcome to <%=uname%> </font></div>
+<%!
+Connection con;
+Statement st;
+PreparedStatement pst;
+ResultSet rs;
+String insname,insid,period;
+int amt;
+int[] per1=new int[5];
+%>
+<%
+insid=request.getParameter("insid");
+Class.forName("oracle.jdbc.driver.OracleDriver");
+con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","insportal","insportal");
+st = con.createStatement();
+rs=st.executeQuery("select * from insurance where insid='"+insid+"'");
+if(rs.next())
+{
+insname=rs.getString(2);
+amt=rs.getInt(3);
+period=rs.getString(4);
+}
+StringTokenizer per=new StringTokenizer(period,"-") ;
+int count=per.countTokens();
+for(int i=0;i<count;i++)
+per1[i]=Integer.parseInt(per.nextToken());
+%>  
+<input type="hidden" name="insid" value="<%=insid%>">
+<div style="position: absolute; width: 427px; height: 120px; z-index: 2; left: 383px; top: 272px" id="layer17">
+    <table border="0" width="100%" id="table2" height="123">
+        <tr>
+            <td width="175" height="32"><b>
+            <font face="Tahoma" size="2" color="#1A86D7">Select the Term (</font><font face="Tahoma" color="#1A86D7" size="1">in months</font><font face="Tahoma" size="2" color="#1A86D7">)</font></b></td>
+            <td height="32"><select size="1" name="term">
+                <option selected value="Select">Select</option>
+                    <option value="3">3</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td width="175" height="24">
+            <font face="Tahoma" size="2" color="#1A86D7"><b>Select a Period</b></font></td>
+            <td height="24"><select size="1" name="period">
+                    <option value="Select" selected> Select</option>
+                    <%
+                    for(int i=0;i<count;i++)
+                    {
+                    %>
+                    <option value="<%=per1[i]%>" ><%=per1[i]%></option>
+                    <%
+                    }
+                    %>
+            </select></td>
+            
+        </tr>
+        <tr>
+            <td width="175">&nbsp;</td>
+            <td><input type="submit" value="View Terms Payment" name="B1"></td>
+        </tr>
+    </table>
+</div>
+</form>
+</body>
+
+</html>

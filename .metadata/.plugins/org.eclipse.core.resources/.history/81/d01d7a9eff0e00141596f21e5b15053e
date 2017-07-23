@@ -1,0 +1,221 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.sql.*" %>
+<html>
+<head>
+<link rel="StyleSheet" type="text/css" href="style.css">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>welcome</h1>
+
+
+	<form method="post" action="">
+            <center>
+            <table border="1" width="50%" cellpadding="5">
+                <thead>
+               
+                    <tr>
+                        <th colspan="2">Enter Information Here</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="fname" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lname" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" name="email" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>User Name</td>
+                        <td><input type="text" name="username" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password" value="" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Role</td>
+                    	<td><select name="role">
+                    	<option value="customer">Customer</option>
+                    	<option value="administrator">Administrator</option>
+                    	<option value="postmaster">Post Master</option>
+                    	</select>
+                    </tr>
+                    <tr>
+                    	<td>Gender</td>
+                    	<td>
+                    	<select name="gender">
+                    	<option value="Male" >Male</option>
+                    	<option value="Female">Female</option>
+                    	</select>	
+                    </tr>
+                    <tr>
+                    	<td>Date of Birth</td>
+                    	<td>
+                    	<select name="day">
+                    	<option value="1">1</option>
+                    	<option value="2">2</option>
+                    	<option value="3">3</option>
+                    	<option value="4">4</option>
+                    	<option value="5">5</option>
+                    	<option value="6">6</option>
+                    	<option value="7">7</option>
+                    	<option value="8">8</option>
+                    	<option value="9">9</option>
+                    	<option value="10">10</option>
+                    	<option value="11">11</option>
+                    	<option value="12">12</option>
+                    	<option value="13">13</option>
+                    	<option value="14">14</option>
+                    	<option value="15">15</option>
+                    	<option value="16">16</option>
+                    	<option value="17">17</option>
+                    	<option value="18">18</option>
+                    	<option value="19">19</option>
+                    	<option value="20">20</option>
+                    	<option value="21">21</option>
+                    	<option value="22">22</option>
+                    	<option value="23">23</option>
+                    	<option value="24">24</option>
+                    	<option value="25">25</option>
+                    	<option value="26">26</option>
+                    	<option value="27">27</option>
+                    	<option value="28">28</option>
+                    	<option value="29">29</option>
+                    	<option value="30">30</option>
+                    	<option value="31">31</option>
+                    	</select>
+                    	<select name="month">
+                    	<option value="jan">Jan</option>
+                    	<option value="feb">Feb</option>
+                    	<option value="mar">Mar</option>
+                    	<option value="apr">Apr</option>
+                    	<option value="may">May</option>
+                    	<option value="june">June</option>
+                    	<option value="july">July</option>
+                    	<option value="aug">Aug</option>
+                    	<option value="sep">Sep</option>
+                    	<option value="oct">Oct</option>
+                    	<option value="nov">Nov</option>
+                    	<option value="dec">Dec</option>
+                    	</select>
+                    	<select	name="year">
+                    	<option value="1990">1990</option>
+                    	<option value="1991">1991</option>
+                    	<option value="1992">1992</option>
+                    	<option value="1993">1993</option>
+                    	<option value="1994">1994</option>
+                    	<option value="1995">1995</option>
+                    	<option value="1996">1996</option>
+                    	<option value="1997">1997</option>
+                    	<option value="1998">1998</option>
+                    	<option value="1999">1999</option>
+                    	<option value="2000">2000</option>
+                    	</select>
+                    </tr>
+                    <tr>
+                    	<td>Addr1</td>
+                    	<td><input type="text" value="" name="addr1">
+                    </tr>
+					<tr>
+                    	<td>Addr2</td>
+                    	<td><input type="text" value="" name="addr2">
+                    </tr>
+                    <tr>
+                    	<td>City</td>
+                    	<td><input type="text" value="" name="city">
+                    </tr>			                    
+                    <tr>
+                    	<td>Pincode</td>
+                    	<td><input type="text" value="" name="pincode">
+                    </tr>
+                    <tr>
+                    	<td>Phone Number</td>
+                    	<td><input type="text" value="" name="phoneno">
+                    </tr>
+                    <tr>
+                    	<td>Bank A/c No</td>
+                    	<td><input type="text" value="" name="accno">
+                    </tr>
+                    <tr>
+                    	<td>Bank Name</td>
+                    	<td><input type="text" value="" name="bankname">
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Submit" /></td>
+                        <td><input type="reset" value="Reset" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Already registered!! <a href="Index.jsp">Login Here</a></td>
+                    </tr>
+                
+                </tbody>
+            </table>
+            </center>
+        </form>
+<%
+
+try
+{
+	String userid = request.getParameter("username");
+	String pass = request.getParameter("password");
+	String fname = request.getParameter("fname");
+	String lname = request.getParameter("lname");
+	String role = request.getParameter("role");
+	String gender = request.getParameter("gender");
+	String day = request.getParameter("day");
+	String month = request.getParameter("month");
+	String year = request.getParameter("year");
+	String addr1 = request.getParameter("addr1");
+	String addr2 = request.getParameter("addr2");
+	String city = request.getParameter("city");
+	String pincode = request.getParameter("pincode");
+	String phoneno = request.getParameter("phoneno");
+	String accno = request.getParameter("accno");
+	String bankname = request.getParameter("bankname");
+
+Class.forName("com.ibm.db2.jcc.DB2Driver");
+Connection con=DriverManager.getConnection("jdbc:db2://localhost:50000/POSTALSE","PRATI_000","FCBarcelona10");
+out.println("database connected");
+String string="insert into userdetails(username,password,fname,lname,role,gender,day,month,year,addr1,addr2,city,pincode,phoneno,accno,bankname) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+out.println("statement before executed");
+ PreparedStatement st = con.prepareStatement(string);
+ out.println("statement executed");
+
+ResultSet rs = st.executeQuery();
+
+ if(rs.next())
+{
+	response.sendRedirect("home.jsp");
+}
+ else
+{
+	out.println("Not Executed");
+}
+ 
+ } 
+ 
+ catch(ClassNotFoundException e)
+{
+e.printStackTrace();
+}
+catch(SQLException e)
+{
+e.printStackTrace();
+}
+
+%>
+
+</body>
+</html>

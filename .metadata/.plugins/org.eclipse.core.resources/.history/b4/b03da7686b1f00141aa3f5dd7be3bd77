@@ -1,0 +1,421 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.sql.*" %>
+<html>
+<head>
+<link rel="StyleSheet" type="text/css" href="style.css">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Register Page</title>
+ <script language="JavaScript" >
+function formValidation()  
+        {
+        var fname = document.registerform.fname;
+        var lname = document.registerform.lname;
+        var email=document.registerform.email;
+        var username=document.registerform.username;
+        var password = document.registerform.password;
+        var role=document.registerform.role;	
+        var gender=document.registerform.gender;
+        var day= document.registerform.day;
+        var month= document.registerform.month;
+        var year= document.registerform.year;
+        var addr1=document.registerform.addr1;
+        var addr2=document.registerform.addr2;
+        var city=document.registerform.city;
+        var pincode=document.registerform.pincode;
+        var pinreg=new RegExp("^[0-9]{6}$");
+        var pinh=pinreg.exec(pincode.value);
+        var phoneno=document.registerform.phoneno;
+        var phreg=new RegExp("^[0-9]{10}$");
+        var rph=phreg.exec(phoneno.value);
+        var accno=document.registerform.accno;
+       var accreg=new RegExp("^[0-9]{16}$");
+        var acch=accreg.exec(accno.value);
+        var bankname=document.registerform.bankname;
+        
+        
+        if(fname.value=="" || fname.value==null)
+        {
+        	alert("First Name field is left empty");
+        	return false;
+        }
+        else if(!(allLetter(fname)))  
+        { 
+        	alert("enter valid First Name");
+        	return false;
+        }
+        else if(lname.value=="" || lname.value==null)
+        {
+        	alert("Last Name field is left empty");
+        	return false;
+        }
+        else if(!(allLetter(lname)))  
+        {  
+        	alert("enter valid lname");
+        	return false;
+        }
+        else if(email.value=="" || email.value==null)
+        {
+        	alert("E-mail field is left empty");
+        	return false;
+        }
+       else if(!(ValidateEmail(email)))  
+        { 
+        	alert("You have entered an invalid email address!");
+        	return false;
+        }
+        else if(username.value=="" || username.value==null)
+        {
+        	alert("user name is left empty");
+        	return false;
+        }
+        else if(!(allLetter(username)))  
+        { 
+        	alert("enter valid user name");
+        	return false;
+        }
+        else if(password.value=="" || password.value==null)
+        {
+        	alert("password is left empty");
+        	return false;
+        }
+        else if(!(password_validation(password,6,15)))  
+        {
+        	alert("password length should be between 6 and 15");
+        	return false;
+        }
+        else if(role.value=="" ||  role.value==null)
+        {
+        	alert("role is not selected");
+        	return false;
+        }
+        else if(gender.value=="" || gender.value==null)
+        {
+        	alert("gender is not selected");
+        	return false;
+        }
+        else if(day.value=="" || day.value==null)
+        {
+        	alert("day is not selected");
+        	return false;
+        }
+        else if(month.value=="" || month.value==null)
+        {
+        	alert("month is not selected");
+        	return false;
+        } 
+        else if(year.value=="" || year.value==null)
+        {
+        	alert("year is not selected");
+        	return false;
+        }
+        else if(!(datevalidation(day,month,year)))
+        {
+       		alert("Enter valid DOB");
+       		return false;
+       	}
+        else if(addr1.value=="" || addr1.value==null)
+        {
+        	alert("address field 1 is left empty");
+        	return false;
+        }
+        else if(addr2.value=="" || addr2.value==null)
+        {
+        	alert("address field 2 is left empty");
+        	return false;
+        }
+        else if(city.value=="" || city.value==null)
+        {
+        	alert("city is left empty");
+        	return false;
+        }
+        else if(!(allLetter(city)))
+        {
+        	alert("Entered city  is invalid");
+        	return false;
+        }
+        else if(pincode.value=="" || pincode.value==null)
+        {
+        	alert("pincode field is left empty");
+        	return false;
+        }
+         else if(!pinh) 
+        { 
+        	alert("Invalid Pin Number");    
+        	return false;
+        }
+        else if(phoneno.value=="" || phoneno.value==null)
+        {
+        	alert("phone number is left empty");
+        	return false;
+        }
+        else if(!rph) 
+        { 
+        	alert("Phone number should have only 10 digits");    
+        	return false;
+        }
+       else if(accno.value=="" || accno.value==null)
+        {
+        	alert("account number is left empty");
+        	return false;
+        }
+        else if(!acch) 
+        { 
+        	alert("Invalid Account Number");    
+        	return false;
+        }
+      else if(bankname.value=="" || bankname.value==null)
+        {
+        	alert("bank name is left empty");
+        	return false;
+        }
+        else if(!(allLetter(bankname)))  
+        { 
+        	alert("enter valid bank name");
+        	return false;
+        }
+        return true;
+        }// formValidation() method closed
+
+
+        //method to validate first name should not have numbers
+        function allLetter(a)  
+        {   
+        	var letters = /^[A-Za-z]+$/;  
+        	if(a.value.match(letters))  
+        	{  
+        		return true;  
+        	}  
+        	else  
+        	{    
+        		return false;  
+        	}  
+        }
+        
+       /*  function ValidateEmail(uemail)  
+        {  
+        	var emailreg=new RegExp("^[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z][a-zA-Z0-9_.]*.[a-zA-Z][a-zA-Z0-9_.]{2}.[a-zA-Z][a-zA-Z0-9_.]{2}$|^[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z][a-zA-Z0-9_.]*.[a-zA-Z][a-zA-Z0-9_.]{3}$");
+        	var remail=emailreg.exec(uemail.value);
+        	if(remail)  
+        	{  
+        		return true;  
+        	}  
+        	else  
+        	{  	   
+        		 return false;  
+        	}  
+        }
+        
+        */ 
+        function password_validation(a,b,c)
+        {
+        	if(a.value.length>=b && a.value.length<=c)
+        	{
+        		return true;
+        	}
+        	else
+        	{
+        		return false;
+        	}
+        }
+        
+        function datevalidation(day,month,year)
+        {
+        	var date1 = new Date(year,month,day);
+        	//var date1=Date.parse(dob);
+        	var currdate=new java.util.Date();
+        	
+        	if(date1>=currdate())
+       		{
+        		alert("please enter valid date");
+        		return false;
+        	}
+        	else
+       		{
+        		return true;
+       		}  	
+        }
+        
+        </script>
+
+</head>
+<body background="background_home.jpg">
+
+<h1>Welcome to e-Postal Services</h1>
+<h3 color="red">Please fill in the fields given below to register </h3>
+
+
+	<form onSubmit="return formValidation();" action="Register1.jsp" method="post" name="registerform">
+            <center>
+            <table border="1" width="50%" cellpadding="5">
+                <thead>
+               
+                    <tr>
+                        <th colspan="2">Enter Information Here</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="fname" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lname" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="url" name="email" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>User Name</td>
+                        <td><input type="text" name="username" value="" ></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="password" value="" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Role</td>
+                    	<td><select name="role">
+		<option value="">Select</option>
+                    	<option value="Customer">Customer</option>
+                    	<option value="Administrator">Administrator</option>
+                    	</select>
+                    </tr>
+                    <tr>
+                    	<td>Gender</td>
+                    	<td>
+                    	<select name="gender">
+		<option value="">Select</option>
+                    	<option value="Male" >Male</option>
+                    	<option value="Female">Female</option>
+                    	</select>	
+                    </tr>
+                    <tr>
+                    	<td>Date of Birth</td>
+                    	<td>
+                    	<select name="day">
+						<option value="">Select</option>
+                    	<option value="1">1</option>
+                    	<option value="2">2</option>
+                    	<option value="3">3</option>
+                    	<option value="4">4</option>
+                    	<option value="5">5</option>
+                    	<option value="6">6</option>
+                    	<option value="7">7</option>
+                    	<option value="8">8</option>
+                    	<option value="9">9</option>
+                    	<option value="10">10</option>
+                    	<option value="11">11</option>
+                    	<option value="12">12</option>
+                    	<option value="13">13</option>
+                    	<option value="14">14</option>
+                    	<option value="15">15</option>
+                    	<option value="16">16</option>
+                    	<option value="17">17</option>
+                    	<option value="18">18</option>
+                    	<option value="19">19</option>
+                    	<option value="20">20</option>
+                    	<option value="21">21</option>
+                    	<option value="22">22</option>
+                    	<option value="23">23</option>
+                    	<option value="24">24</option>
+                    	<option value="25">25</option>
+                    	<option value="26">26</option>
+                    	<option value="27">27</option>
+                    	<option value="28">28</option>
+                    	<option value="29">29</option>
+                    	<option value="30">30</option>
+                    	<option value="31">31</option>
+                    	</select>
+                    	<select name="month">
+		<option value="">Select</option>
+                    	<option value="January">January</option>
+                    	<option value="February">February</option>
+                    	<option value="March">March</option>
+                    	<option value="April">April</option>
+                    	<option value="May">May</option>
+                    	<option value="June">June</option>
+                    	<option value="July">July</option>
+                    	<option value="August">August</option>
+                    	<option value="September">September</option>
+                    	<option value="October">October</option>
+                    	<option value="November">November</option>
+                    	<option value="December">December</option>
+                    	</select>
+                    	<select	name="year">
+		<option value="">Select</option>
+                    	<option value="1990">1990</option>
+                    	<option value="1991">1991</option>
+                    	<option value="1992">1992</option>
+                    	<option value="1993">1993</option>
+                    	<option value="1994">1994</option>
+                    	<option value="1995">1995</option>
+                    	<option value="1996">1996</option>
+                    	<option value="1997">1997</option>
+                    	<option value="1998">1998</option>
+                    	<option value="1999">1999</option>
+                    	<option value="2000">2000</option>
+                    	<option value="2001">2001</option>
+                    	<option value="2002">2002</option>
+                    	<option value="2003">2003</option>
+                    	<option value="2004">2004</option>
+                    	<option value="2005">2005</option>
+                    	<option value="2006">2006</option>
+                    	<option value="2007">2007</option>
+                    	<option value="2008">2008</option>
+                    	<option value="2009">2009</option>
+                    	<option value="2010">2010</option>
+                    	<option value="2011">2011</option>
+                    	<option value="2012">2012</option>
+                    	<option value="2013">2013</option>
+                    	<option value="2014">2014</option>
+                    	<option value="2015">2015</option>
+                    	</select>
+                    </tr>
+                    <tr>
+                    	<td>Addr1</td>
+                    	<td><input type="text" value="" name="addr1">
+                    </tr>
+					<tr>
+                    	<td>Addr2</td>
+                    	<td><input type="text" value="" name="addr2">
+                    </tr>
+                    <tr>
+                    	<td>City</td>
+                    	<td><input type="text" value="" name="city">
+                    </tr>			                    
+                    <tr>
+                    	<td>Pincode</td>
+                    	<td><input type="text" value="" name="pincode">
+                    </tr>
+                    <tr>
+                    	<td>Phone Number</td>
+                    	<td><input type="text" value="" name="phoneno">
+                    </tr>
+                    <tr>
+                    	<td>Bank A/c No</td>
+                    	<td><input type="text" value="" name="accno">
+                    </tr>
+                    <tr>
+                    	<td>Bank Name</td>
+                    	<td><input type="text" value="" name="bankname">
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Submit" /></td>
+                        <td><input type="reset" value="Reset" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Already registered!! <a href="Login.jsp">Login Here</a></td>
+                    </tr>
+                
+                </tbody>
+            </table>
+            </center>
+        </form>
+
+</body>
+</html>

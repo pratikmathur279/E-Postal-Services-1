@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.sql.*" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+	<tr>First Name : </tr>
+	<tr>Last Name : </tr>
+	<tr>Email : </tr>
+	<tr>Username : </tr>
+	<tr>Password : </tr>
+	<tr>Role : </tr>
+	<tr>Date Of Birth : </tr>
+	<tr>Address Line 1 : </tr>
+	<tr>Address Line 2 : </tr>
+	<tr>City : </tr>
+	<tr>Pincode : </tr>
+	<tr>Phone Number : </tr>
+	<tr>Account Number : </tr>
+	<tr>Bank Name : </tr>
+	
+	
+<%	
+	try
+	{		
+		String username = request.getParameter("username");
+		Class.forName("com.ibm.db2.jcc.DB2Driver");
+		Connection con=DriverManager.getConnection("jdbc:db2://localhost:50000/POSTALSE","PRATI_000","FCBarcelona10");
+		String string="select * from emp where username='"+username+"'";
+		PreparedStatement ps=con.prepareStatement(string);
+		ResultSet rs=ps.executeQuery(string);
+		if(rs.next())
+		{
+		
+		}
+	}
+	catch(ClassNotFoundException e)
+	{
+		e.printStackTrace();
+	}
+	catch(SQLException e)
+	{
+		e.printStackTrace();
+	}
+%>
+	</table>
+</body>
+</html>

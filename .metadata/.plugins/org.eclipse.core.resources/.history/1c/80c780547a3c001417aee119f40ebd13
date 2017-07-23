@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>E-Postal Services</title>
+<link rel="stylesheet" href="E:\E-Postal Services\Project\css\style.css" type="text/css">
+</head>
+<body class="look" background="menu-wrapper.png">
+	<center>
+	<font color="white">
+	<table width=100% align="center">
+			<tr>
+				<td align="center" ><a href="home.jsp" target="f2" style="color:white ;">Home</td>
+				<td align="center"><a href="Register.jsp" target="f2" style="color: white">Register</td>
+				<td align="center"><a href="Profile.jsp" target="f2" style="color: white">Profile</td>
+				<td align="center"><a href="cataloglist.jsp" target="f2" style="color: white">Catalog</td>
+				<td align="center"><a href="cartdisplay.jsp" target="f2" style="color: white">Cart</td>
+				<td align="center"><a href="aboutus.jsp" target="f2" style="color: white">About Us</td>
+				
+			</tr>
+		</table>
+</font>	
+	</center>
+</body>
+</html>

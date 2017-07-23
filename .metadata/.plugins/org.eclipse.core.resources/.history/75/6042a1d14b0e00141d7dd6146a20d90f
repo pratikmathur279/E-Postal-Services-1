@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import ="java.sql.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet" href="css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Login Page</title>
+</head>
+<body>
+	<form method="post" action="Login.jsp">
+	<center>
+            <table border="1" width="40%" cellpadding="3">
+                <thead>
+                    <tr>
+                        <th colspan="2">Login Here</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>User Name</td>
+                        <td><input type="text" name="username" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="userpass" value="" /></td>
+                    </tr>
+                    <tr>
+                    	<td>Role</td>
+                    	<td><select name="role">
+                    	<option value="customer">Customer</option>
+                    	<option value="administrator">Administrator</option>
+                    	<option value="postmaster">Post Master</option>
+                    	</select>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Login" /></td>
+                        <td><input type="reset" value="Reset" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Yet Not Registered!! <a href="Register.jsp">Register Here</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            </center>
+        </form>
+
+<%
+
+try
+{
+	String userid = request.getParameter("username");
+	String pass = request.getParameter("password");
+
+Class.forName("com.ibm.db2.jcc.DB2Driver");
+Connection con=DriverManager.getConnection("jdbc:db2://localhost:50000/POSTALSE","PRATI_000","FCBarcelona10");
+out.println(" connected to db "); 
+
+String string="select username,password from userdetails where username='" + userid + "' and  password='" + pass + "'";
+PreparedStatement st = con.prepareStatement(string);
+out.println("statement executed "); 
+ResultSet rs = st.executeQuery();
+
+if(userid.equals("username")==true)
+{ 
+
+out.println("welcome");
+}
+}
+catch(ClassNotFoundException e)
+{
+e.printStackTrace();
+}
+catch(SQLException e)
+{
+e.printStackTrace();
+}
+
+
+
+%>
+
+
+
+
+
+</body>
+</html>

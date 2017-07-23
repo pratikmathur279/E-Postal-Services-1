@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>E-Postal Services</title>
+
+<script language="javascript">
+   function use()
+   {
+      frm1.T1.focus();
+   }
+
+   function check()
+   {
+   a=frm1.T1.value.length; 
+   b=frm1.T2.value.length;
+   c=frm1.T3.value.length;
+   d=frm1.T4.value.length;
+   if( (a<=0 )||( b<=0)||( c<=0)||(d<=0))
+        {
+		alert('Incomplete Information');
+		return false;
+       }
+       else
+       if(a>=6)
+       {
+         alert('Product code max size is 5');
+         return false;
+        }
+        else
+        if(b>=11)
+        {
+        alert('Product name max size is 10');
+        return false;
+        }
+		else
+	    {   
+          return true;
+         }
+     }
+  </script>
+
+</head>
+<body onload="return use()">
+	<form method="post" action="addproducts1.jsp" onsubmit="return check()">
+			<center>
+				<table border="1" width="50%">
+					<tr>
+					<td>Enter Product ID : </td>
+					<td><input type="text" >
+					</tr>
+				</table>
+			</center>
+	</form>
+</body>
+</html>

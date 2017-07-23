@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%@ page import ="java.sql.*" %>
+<%
+    String userid = request.getParameter("username");    
+    String pwd = request.getParameter("password");
+    Class.forName("com.ibm.db2.jdbc.DB2Driver");
+    Connection con = DriverManager.getConnection("jdbc:db2://localhost:50000/postalse","prati_000","FCBarcelona10");
+    Statement st = con.createStatement();
+    ResultSet rs;
+    rs = st.executeQuery("select * from userdetails where username='" + userid + "' password='" + pwd + "'" and "' role='" + pwd + "'");
+    if (rs.next()) 
+{
+        session.setAttribute("username", userid);
+        //out.println("welcome " + userid);
+        //out.println("<a href='logout.jsp'>Log out</a>");
+        }
+		else
+		{
+        out.println("Invalid password <a href='index.jsp'>try again</a>");
+    	}
+}
+%>
+</body>
+</html>

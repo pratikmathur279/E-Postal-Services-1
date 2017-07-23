@@ -1,0 +1,30 @@
+<%@page language="java"%>
+<%@page import="java.sql.*"%>
+<form method="post">
+<table border="1">
+<tr><th>Name</th><th>Address</th><th>Contact No</th><th>Email</th></tr>
+<%
+
+String name=request.getParameter("name");
+try {
+Class.forName("com.ibm.db2.jcc.DB2Driver").newInstance();
+Connection conn = DriverManager.getConnection("jdbc:db2://localhost:50000/POSTALSE", "prati_000","FCBarcelona10");
+String query = "insert into itemsselected where ;
+Statement st = conn.createStatement();
+ResultSet rs = st.executeQuery(query);
+while(rs.next()){
+%>
+<tr>
+<td><input type="text" name="name" value="<%=rs.getString("name")%>"></td>
+
+</tr>
+<tr>
+<td><input type="submit" name="Submit" value="Update" style="background-color:#49743D;font-weight:bold;color:#ffffff;"></td>
+</tr>
+<%
+}
+}
+catch(Exception e){}
+%>
+</table>
+</form>

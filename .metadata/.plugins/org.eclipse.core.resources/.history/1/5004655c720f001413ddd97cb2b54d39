@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title> Left the Frame </title>
+   </head>
+     <body>
+      <a href="C:\Users\das\Desktop\wt lab\22_1_14_EXP1\cse.html"
+                target="main_page"> CSE </a> <br/>
+        <a href="C:\Users\das\Desktop\wt lab\22_1_14_EXP1\main.html"
+                   target="main_page"> IT </a>
+    </body>
+
+</html>

@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+.look
+{
+	font normal;
+	font-family : cursive;
+	font-size: 22px;
+	font-stretch: normal;
+	font-weight: bold;
+	background-color: aqua;
+	color: blue;
+	background-image: url("C://Users//USER//Pictures//RM.jpg")
+}
+a:LINK
+{
+	text-decoration: none;
+}
+a:VISITED
+{
+	text-decoration: none;
+}
+h1
+{
+	align: center;
+	color:red
+}

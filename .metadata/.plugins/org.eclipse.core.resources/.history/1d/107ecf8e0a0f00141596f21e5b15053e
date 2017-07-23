@@ -1,0 +1,119 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.sql.*" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+<%	
+	ResultSet rs=null;
+	try
+	{		
+		String userid=request.getParameter("username");
+		Class.forName("com.ibm.db2.jcc.DB2Driver");
+		Connection con=DriverManager.getConnection("jdbc:db2://localhost:50000/POSTALSE","PRATI_000","FCBarcelona10");
+		String string="select * from emp where username='"+userid+"'";
+		PreparedStatement ps=con.prepareStatement(string);
+		rs=ps.executeQuery(string);
+		if(rs.next())
+		{
+			String fname=rs.getString("1");
+			String lname=rs.getString("lname");
+			String email=rs.getString("email");
+			String username=rs.getString("username");
+			String password=rs.getString("password");
+			String role=rs.getString("role");
+			String gender=rs.getString("gender");
+			String date=rs.getString("date");
+			String month =rs.getString("month");
+			String year=rs.getString("year");
+			String addr1=rs.getString("addr1");
+			String addr2=rs.getString("addr2");
+			String city=rs.getString("city");
+			String pincode=rs.getString("pincode");
+			String phoneno=rs.getString("phoneno");
+			String accno=rs.getString("accno");
+			String bankname=rs.getString("bankname");
+		}
+	}
+	catch(ClassNotFoundException e)
+	{
+		e.printStackTrace();
+	}
+	catch(SQLException e)
+	{
+		e.printStackTrace();
+	}
+%>
+<table>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString(1)%></td>	
+	</tr>
+	<tr>
+		<td>Last Name : </td>
+		<td><%=rs.getString(2)%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString(3)%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+	<tr>
+		<td>First Name : </td>
+		<td><%=rs.getString()%></td>	
+	</tr>
+</table>
+</body>
+</html>
